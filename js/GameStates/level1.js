@@ -115,23 +115,37 @@ gameStates[`level1`] = function()
 		wiz.top={x:0,y:-wiz.hitBoxHeight/2};
 	}
 
-	if(keys[`D`]  )
-	{
-		wiz.dir=1;
-		if(wiz.currentState != `crouch`) 
-		{
-			if(wiz.canJump)wiz.changeState(`walk`)
-			wiz.vx += wiz.force
-			
+	if (keys[`D`]) {
+		wiz.dir = 1;
+
+		if (wiz.currentState !== `crouch`) {
+			if (wiz.canJump && wiz.currentState !== `walkRightStart` && wiz.currentState !== `walk`) {
+				wiz.changeState(`walkRightStart`);
+
+				setTimeout(() => {
+					if (wiz.currentState === `walkRightStart`) {
+						wiz.changeState(`walk`);
+					}
+				}, 100);
+			}
+
+			wiz.vx += wiz.force;
 		}
-		
 	}
 	if(keys[`A`] )
 	{
 		wiz.dir=-1;
 		if(wiz.currentState != `crouch` ) 
 		{
-			if(wiz.canJump)wiz.changeState(`walk`)
+			if (wiz.canJump && wiz.currentState !== `walkRightStart` && wiz.currentState !== `walk`) {
+				wiz.changeState(`walkRightStart`);
+
+				setTimeout(() => {
+					if (wiz.currentState === `walkRightStart`) {
+						wiz.changeState(`walk`);
+					}
+				}, 100);
+			}
 			wiz.vx += -wiz.force
 		}
 		
