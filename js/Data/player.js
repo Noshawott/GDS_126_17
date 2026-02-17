@@ -19,7 +19,7 @@ Properties:
 
 var playerData ={
 	info:{
-		src:`images/walkRightWithIdle.png`
+		src:`images/spriteSheet.png`
 	},
 	states:{
 		//The idle animation 
@@ -29,16 +29,16 @@ var playerData ={
 			cycle:true,
 			frames:
 			[
-				{width:128, height:128, startX:0, startY:0},
-				{width:128, height:128, startX:128, startY:0},
-				{width:128, height:128, startX:256, startY:0},
-				{width:128, height:128, startX:384, startY:0},
-				{width:128, height:128, startX:512, startY:0},
-				{width:128, height:128, startX:640, startY:0},
-				{width:128, height:128, startX:768, startY:0},
-				{width:128, height:128, startX:896, startY:0},
-				{width:128, height:128, startX:1024, startY:0},
-				{width:128, height:128, startX:1152, startY:0}
+					{ width: 128, height: 128, startX: 0, startY: -5 },
+					{ width: 128, height: 128, startX: 128, startY: -5 },
+					{ width: 128, height: 128, startX: 256, startY: -5 },
+					{ width: 128, height: 128, startX: 384, startY: -5 },
+					{ width: 128, height: 128, startX: 512, startY: -5 },
+					{ width: 128, height: 128, startX: 640, startY: -5 },
+					{ width: 128, height: 128, startX: 768, startY: -5 },
+					{ width: 128, height: 128, startX: 896, startY: -5 },
+					{ width: 128, height: 128, startX: 1024, startY: -5 },
+					{ width: 128, height: 128, startX: 1152, startY: -5 }
 				
 			]
 		},
@@ -52,7 +52,7 @@ var playerData ={
 				[
 					{ width: 128, height: 128, startX: 0, startY: 128 }
 				]
-			},
+		},
 		walk:
 		{
 			fps:5	,
@@ -60,17 +60,45 @@ var playerData ={
 			frames:
 			[
 				//{width:128, height:128, startX:0, startY:128},
-				{width:128, height:128, startX:128, startY:128},
-				{width:128, height:128, startX:256, startY:128},
-				{width:128, height:128, startX:384, startY:128},
-				{width:128, height:128, startX:512, startY:128},
-				{width:128, height:128, startX:640, startY:128},
-				{width:128, height:128, startX:768, startY:128},
-				{width:128, height:128, startX:896, startY:128},
-				{width:128, height:128, startX:1024, startY:128},
-				{width:128, height:128, startX:1152, startY:128}
+				{width:128, height:128, startX:128, startY:127},
+					{ width: 128, height: 128, startX: 256, startY: 127 },
+					{ width: 128, height: 128, startX: 384, startY: 127 },
+					{ width: 128, height: 128, startX: 512, startY: 127 },
+					{ width: 128, height: 128, startX: 640, startY: 127 },
+					{ width: 128, height: 128, startX: 768, startY: 127 },
+					{ width: 128, height: 128, startX: 896, startY: 127 },
+					{ width: 128, height: 128, startX: 1024, startY: 127 },
+					{ width: 128, height: 128, startX: 1152, startY: 127 }
 			]
 		},
+		walkLeftStart:
+		{
+			fps: 10,
+			cycle: true,
+			repeat: false,
+			frames:
+			[
+					{ width: 128, height: 128, startX: 0, startY: 256 }
+			]
+		},
+		walkLeft:
+		{
+			fps: 5,
+			cycle: true,
+			frames:
+				[
+					//{width:128, height:128, startX:0, startY:128},
+					{ width: 128, height: 128, startX: 128, startY: 256 },
+					{ width: 128, height: 128, startX: 256, startY: 256 },
+					{ width: 128, height: 128, startX: 384, startY: 256 },
+					{ width: 128, height: 128, startX: 512, startY: 256 },
+					{ width: 128, height: 128, startX: 640, startY: 256 },
+					{ width: 128, height: 128, startX: 768, startY: 256 },
+					{ width: 128, height: 128, startX: 896, startY: 256 },
+					{ width: 128, height: 128, startX: 1024, startY: 256 },
+					{ width: 128, height: 128, startX: 1152, startY: 256 }
+				]
+			},
 		//The jump animation 
 		jump:
 		{
@@ -84,15 +112,15 @@ var playerData ={
 		//The crouch animation 
 		crouch:
 		{
-			fps:15,
-			cycle:true,
+			fps:7,
+			cycle:false,
 			frames:
 			[
-				{width:128, height:128, startX:0, startY:0},
-				{width:128, height:128, startX:128, startY:0},
-				{width:128, height:128, startX:256, startY:0},
-				//{width:128, height:128, startX:768, startY:0},
-				//{width:128, height:128, startX:896, startY:0}
+				{width:128, height:128, startX:0, startY:384},
+				{width:128, height:128, startX:128, startY:384},
+				{width:128, height:128, startX:256, startY:384},
+				{width:128, height:128, startX:384, startY:384},
+				{width:128, height:128, startX:512, startY:384}
 			]
 		},
 		//The attack animation 

@@ -99,15 +99,17 @@ for(let i=0; i<100; i++)
 
 gameStates[`level1`] = function()
 {
-	if(!keys[`W`] && !keys[`S`] && !keys[`D`] && !keys[`A`] && !keys[` `] && canShoot && wiz.canJump)
+	if (!keys[`W`] && !keys[`S`] && !keys[`D`] && !keys[`A`] && !keys[` `] && canShoot && wiz.canJump && wiz.currentState !== 'walkRightStart' && wiz.currentState !== 'walkLeftStart')
 	{
 		wiz.changeState(`idle`)
+		wiz.dir = 1;
 	}
 	
 	
 	if(keys[`S`])
 	{
-		wiz.top={x:0,y:0};
+		wiz.top = { x: 0, y: 0 };
+		wiz.bottom = { x: 0, y: 60 };
 		wiz.changeState(`crouch`)
 	}
 	else
@@ -115,12 +117,14 @@ gameStates[`level1`] = function()
 		wiz.top={x:0,y:-wiz.hitBoxHeight/2};
 	}
 
+
+
 	if (keys[`D`]) {
 		wiz.dir = 1;
 
 		if (wiz.currentState !== `crouch`) {
 			if (wiz.canJump && wiz.currentState !== `walkRightStart` && wiz.currentState !== `walk`) {
-				wiz.changeState(`walkRightStart`);
+				wiz.changeState(`walkRightStart`)
 
 				setTimeout(() => {
 					if (wiz.currentState === `walkRightStart`) {
@@ -132,17 +136,27 @@ gameStates[`level1`] = function()
 			wiz.vx += wiz.force;
 		}
 	}
+	document.addEventListener('keyup', function (event) {
+		if (event.key.toLowerCase() === 'd') {
+			wiz.changeState('walkRightStart')
+			setTimeout(() => {
+				if (wiz.currentState === `walkRightStart`) {
+					wiz.changeState(`idle`);
+				}
+			}, 100);
+		}
+	});
 	if(keys[`A`] )
 	{
 		wiz.dir=-1;
 		if(wiz.currentState != `crouch` ) 
 		{
-			if (wiz.canJump && wiz.currentState !== `walkRightStart` && wiz.currentState !== `walk`) {
-				wiz.changeState(`walkRightStart`);
+			if (wiz.canJump && wiz.currentState !== `walkLeftStart` && wiz.currentState !== `walkLeft`) {
+				wiz.changeState(`walkLeftStart`);
 
 				setTimeout(() => {
-					if (wiz.currentState === `walkRightStart`) {
-						wiz.changeState(`walk`);
+					if (wiz.currentState === `walkLeftStart`) {
+						wiz.changeState(`walkLeft`);
 					}
 				}, 100);
 			}
@@ -150,6 +164,16 @@ gameStates[`level1`] = function()
 		}
 		
 	}
+	document.addEventListener('keyup', function (event) {
+		if (event.key.toLowerCase() === 'a') {
+			wiz.changeState('walkLeftStart')
+			setTimeout(() => {
+				if (wiz.currentState === `walkLeftStart`) {
+					wiz.changeState(`idle`);
+				}
+			}, 100);
+		}
+	});
 	if(keys[`W`] && wiz.canJump )
 	{
 		wiz.canJump = false;
