@@ -32,7 +32,6 @@ var caveBack = new Grid(caveBackData, {world:level, x:1024, tileHeight:64, tileW
 var caveHit = new Grid(caveHitData, {world:level, x:1024, tileHeight:64, tileWidth:64});
 
 
-
 //This is a group used for collisions
 var g1 = new Group();
 g1.color= `rgb(251,0,254)`;
@@ -104,6 +103,12 @@ gameStates[`level1`] = function()
 		wiz.changeState(`idle`)
 		wiz.dir = 1;
 	}
+	if (keys[`W`] && wiz.canJump || keys[`W`] && keys['A'] && wiz.canJump || keys[`W`] && keys['D'] && wiz.canJump || keys[`W`] && keys['S'] && wiz.canJump) {
+		wiz.canJump = false;
+		wiz.vy = wiz.jumpHeight;
+		wiz.changeState(`jump`)
+		//sounds.play(`splode`,1)
+	}
 	
 	
 	if(keys[`S`])
@@ -116,6 +121,16 @@ gameStates[`level1`] = function()
 	{
 		wiz.top={x:0,y:-wiz.hitBoxHeight/2};
 	}
+	document.addEventListener('keyup', function (event) {
+		if (event.key.toLowerCase() === 's') {
+			wiz.changeState('unCrouch')
+			setTimeout(() => {
+				if (wiz.currentState === `unCrouch`) {
+					wiz.changeState(`idle`);
+				}
+			}, 100);
+		}
+	});
 
 
 
@@ -132,7 +147,6 @@ gameStates[`level1`] = function()
 					}
 				}, 100);
 			}
-
 			wiz.vx += wiz.force;
 		}
 	}
@@ -174,13 +188,7 @@ gameStates[`level1`] = function()
 			}, 100);
 		}
 	});
-	if(keys[`W`] && wiz.canJump )
-	{
-		wiz.canJump = false;
-		wiz.vy = wiz.jumpHeight;
-		wiz.changeState(`jump`)
-		//sounds.play(`splode`,1)
-	}
+	
 	shotTimer--;
 	if(shotTimer <=0)
 	{
@@ -198,10 +206,9 @@ gameStates[`level1`] = function()
 			wiz.changeState(`attack`)
 			shotTimer = shotDelay
 			//console.log(`Boom`)
-
 			bullets[currentBullet].vx = 5*wiz.dir;
 			bullets[currentBullet].world = level;
-			bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 96) ;
+			bullets[currentBullet].x = wiz.x - level.x + (wiz.dir * 96);
 			bullets[currentBullet].y = wiz.y + 20;
 			bullets[currentBullet].dir = wiz.dir;
 			
