@@ -140,18 +140,12 @@ var playerData ={
 		attack:
 		{
 			fps:3,
-			cycle:false,
-			//width:300,
+			cycle:true,
 			frames:
 			[
-				{width:128, height:128, startX:0, startY:0},
-				{width:128, height:128, startX:128, startY:0},
-				{width:128, height:128, startX:256, startY:0},
-				//{width:128, height:128, startX:1152, startY:0},
-				//{width:128, height:128, startX:1152, startY:0},
-				//{width:128, height:128, startX:1152, startY:0},
-				//{width:128, height:128, startX:1152, startY:0}
-				
+					{ width: 124, height: 128, startX: 135, startY: 505 },
+					{ width: 124, height: 128, startX: 263, startY: 505 },
+					{ width: 124, height: 128, startX: 391, startY: 505 }
 			]
 		}
 	}
