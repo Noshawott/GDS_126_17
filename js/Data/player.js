@@ -135,7 +135,22 @@ var playerData ={
 					{ width: 128, height: 128, startX: 1024, startY: 384 },
 					{ width: 128, height: 128, startX: 1152, startY: 384 }
 			]
-			},
+		},
+		lightning:
+		{
+			fps: 1,
+			cycle: true,
+			frames:
+				[
+					{ width: 32, height: 32, startX: 546, startY: 545 },
+					{ width: 32, height: 32, startX: 578, startY: 545 },
+					{ width: 32, height: 32, startX: 610, startY: 545 },
+					{ width: 32, height: 32, startX: 642, startY: 545 },
+					{ width: 32, height: 32, startX: 674, startY: 545 },
+					{ width: 32, height: 32, startX: 706, startY: 545 },
+
+				]
+		},
 		//The attack animation 
 		attack:
 		{

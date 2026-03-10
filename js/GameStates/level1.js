@@ -69,11 +69,11 @@ sky.img.src = `images/sky.png`
 
 //repeating background
 var rbg = new GameObject({x:level.x, y:level.y, width:1024, height:512})
-rbg.img.src=`images/hills.png`
+rbg.img.src=`images/back.png`
 
 //middleground
 var bg = new GameObject({x:level.x,y:level.y, width:canvas.width*4, height:canvas.height})
-bg.img.src=`images/bgfull.png`
+//bg.img.src=`images/bgfull.png`
 
 /*------------------vvBULLET STUFFvv----------------------*/
 
@@ -89,7 +89,7 @@ for(let i=0; i<100; i++)
 	//bullets[i].img.src="images/mrt.jpg"
 	bullets[i].makeSprite(playerData)
 	bullets[i].y=-10000
-	bullets[i].changeState(`walk`)
+	bullets[i].changeState(`lightning`)
 }
 
 //console.log(bullets)
@@ -136,7 +136,6 @@ gameStates[`level1`] = function()
 
 	if (keys[`D`]) {
 		wiz.dir = 1;
-
 		if (wiz.currentState !== `crouch`) {
 			if (wiz.canJump && wiz.currentState !== `walkRightStart` && wiz.currentState !== `walk`) {
 				wiz.changeState(`walkRightStart`)
@@ -158,6 +157,11 @@ gameStates[`level1`] = function()
 					wiz.changeState(`idle`);
 				}
 			}, 100);
+		}
+	});
+	document.addEventListener('keydown', function (event) {
+		if (event.key.toLowerCase() === 'd') {
+			sounds.play('float', 1);
 		}
 	});
 	if(keys[`A`] )
@@ -188,6 +192,11 @@ gameStates[`level1`] = function()
 			}, 100);
 		}
 	});
+	document.addEventListener('keydown', function (event) {
+		if (event.key.toLowerCase() === 'a') {
+			sounds.play('float', 1);
+		}
+	});
 	
 	shotTimer--;
 	if(shotTimer <=0)
@@ -206,13 +215,13 @@ gameStates[`level1`] = function()
 			wiz.changeState(`attack`)
 			shotTimer = shotDelay
 			//console.log(`Boom`)
-			bullets[currentBullet].vx = 5*wiz.dir;
+			bullets[currentBullet].vx = 10*wiz.dir;
 			bullets[currentBullet].world = level;
 			bullets[currentBullet].x = wiz.x - level.x + (wiz.dir * 96);
-			bullets[currentBullet].y = wiz.y + 20;
+			bullets[currentBullet].y = wiz.y;
 			bullets[currentBullet].dir = wiz.dir;
 			
-			//sounds.play(`splode`,1)
+			sounds.play(`thunder`,1)
 
 			currentBullet++;
 			if(currentBullet>=bullets.length)
@@ -344,7 +353,7 @@ gameStates[`level1`] = function()
 	//Moves, checks collision and renders projectiles.
 	for(let i=0; i<bullets.length; i++)
 	{
-		if(bullets[i].overlap(stage)) bullets[i].vy+=1;
+		if(bullets[i].overlap(stage)) //bullets[i].vy+=1;
 		bullets[i].move()
 		bullets[i].play(function(){return}).drawSprite()
 		//bullets[i].angle+=10
